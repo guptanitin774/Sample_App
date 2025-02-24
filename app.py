@@ -6,7 +6,7 @@ import requests
 import openai  # Ensure you have an OpenAI API key
 
 # OpenAI API Key (Replace with your key)
-openai.api_key = "your-openai-api-key"
+openai.api_key = "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"
 
 # Define the API URL
 API_URL = 'https://tessapp.tess360.com/getTicket_IncidenceData'
