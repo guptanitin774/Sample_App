@@ -1,15 +1,15 @@
 import streamlit as st
 import requests
 import pandas as pd
-import openai
+from openai import OpenAI
 from fpdf import FPDF
 import json
 import plotly.express as px
 import re
 from datetime import datetime, timedelta
 
-# Set your OpenAI API Key
-openai.api_key = st.secrets["openai_api_key"]  # Ensure the key exists in secrets.toml
+# Initialize the OpenAI client
+client = OpenAI(api_key=st.secrets["openai_api_key"])
 
 api_url = 'https://tessapp.tess360.app/getTicket_IncidenceData'
 request_data = {
@@ -160,7 +160,7 @@ def generate_ai_report(ticket_data, user_prompt):
     The report should be professional, clear, and concise.
     """
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
@@ -168,7 +168,7 @@ def generate_ai_report(ticket_data, user_prompt):
         ]
     )
 
-    return response['choices'][0]['message']['content']
+    return response.choices[0].message.content
 
 def generate_ticket_analytics(df):
     """Enhanced analytics with additional visualizations and metrics."""
