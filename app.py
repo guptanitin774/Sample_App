@@ -9,7 +9,7 @@ import re
 from datetime import datetime, timedelta
 
 # Set your OpenAI API Key
-openai.api_key = "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"
+openai.api_key = st.secrets["openai_api_key"]  # Ensure the key exists in secrets.toml
 
 api_url = 'https://tessapp.tess360.app/getTicket_IncidenceData'
 request_data = {
